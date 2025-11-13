@@ -47,6 +47,7 @@
     "@fullcalendar/daygrid": "^6.1.19",
     "@fullcalendar/interaction": "^6.1.19",
     "@fullcalendar/vue3": "^6.1.19",
+    "@vueup/vue-quill": "^1.2.0",
     "amqplib": "^0.10.8",
     "axios": "^1.7.7",
     "bcryptjs": "^3.0.2",
