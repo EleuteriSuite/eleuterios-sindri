@@ -55,6 +55,7 @@
     "dexie": "^4.2.0",
     "electron-updater": "^6.6.2",
     "express": "^4.21.1",
+    "html-to-markdown": "^1.0.0",
     "http-proxy-middleware": "^3.0.3",
     "js-cookie": "^3.0.5",
     "node-thermal-printer": "^4.5.0",
