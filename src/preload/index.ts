@@ -1,11 +1,6 @@
 import { contextBridge } from 'electron' // ipcRenderer
 import { electronAPI } from '@electron-toolkit/preload'
-
-// Custom APIs for renderer
-/*const sindriElectronApi = {
-  //getImportData: () => ipcRenderer.send('getImportData'),
-  //onImportDataResult: (callback) => ipcRenderer.on('importDataResult', (event, response) => callback(response, event)),
-}*/
+import { sindriFiles } from './openFile'
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise
@@ -13,13 +8,13 @@ import { electronAPI } from '@electron-toolkit/preload'
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)
-    // contextBridge.exposeInMainWorld('sindriElectronApi', sindriElectronApi)
+    contextBridge.exposeInMainWorld('sindriFiles', sindriFiles)
   } catch (error) {
     console.error(error)
   }
 } else {
   // @ts-ignore (define in dts)
-  // window.sindriElectronApi = sindriElectronApi
+  window.sindriFiles = sindriFiles
   // @ts-ignore (define in dts)
   window.electron = electronAPI
 }

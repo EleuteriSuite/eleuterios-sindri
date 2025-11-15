@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, powerSaveBlocker } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
 import { createWindow } from './window'
+import { setupOpenFilesIpc } from './openFiles'
 
 // Evitar suspensión del sistema
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -22,6 +23,8 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
+
+  setupOpenFilesIpc()
 
   // Ventana principal
   createWindow()

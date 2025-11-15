@@ -21,6 +21,10 @@
               </li>
 
               <li>
+                <OpenFile class="font-medium text-sm" />
+              </li>
+
+              <li>
                 <RouterLink @click="openLink()" to="/" class="font-medium text-sm">
                   Home
                 </RouterLink>
@@ -80,6 +84,10 @@
                   @click="openAriadna()"
                   >Ariadna</a
                 >
+              </li>
+
+              <li class="mb-1">
+                <OpenFile class="block cursor-pointer p-4 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded" />
               </li>
 
               <li class="mb-1">
@@ -159,10 +167,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, getCurrentInstance } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from './store/user'
 import { useSettingsStore } from './store/settings'
+import OpenFile from './components/OpenFile.vue'
 
 // stores
 const user = useUserStore()

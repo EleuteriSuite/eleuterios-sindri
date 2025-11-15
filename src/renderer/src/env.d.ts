@@ -6,3 +6,25 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+export {} // ensure this file is a module
+
+declare global {
+  interface SindriFilePayload {
+    canceled?: boolean
+    path?: string
+    name?: string
+    ext?: string
+    content?: string
+  }
+
+  interface SindriFilesAPI {
+    openDialog: () => void
+    onFileContent: (callback: (payload: SindriFilePayload) => void) => void
+  }
+
+  interface Window {
+    electron: unknown
+    sindriFiles: SindriFilesAPI
+  }
+}
