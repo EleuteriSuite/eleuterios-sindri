@@ -64,7 +64,8 @@
     "serialport": "^12.0.0",
     "sharp": "^0.34.2",
     "socket.io-client": "^4.8.1",
-    "underscore": "^1.13.7"
+    "underscore": "^1.13.7",
+    "@eleuteri-suite/eleuterios-sindri-preview": "git+https://github.com/EleuteriSuite/eleuterios-sindri-preview.git#v0.1.0"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.2",
