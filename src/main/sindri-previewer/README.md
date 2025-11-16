@@ -1,3 +1,0 @@
-# Sindri previewer
-
-Loading...

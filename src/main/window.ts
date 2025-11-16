@@ -33,7 +33,7 @@ export function createWindow(): void {
     return { action: 'deny' };
   });
 
-  tray = new Tray(join(__dirname, '../../resources/icon.ico'));
+  /*tray = new Tray(join(__dirname, '../../resources/icon.ico'));
   const contextMenu = Menu.buildFromTemplate([
     { label: 'Mostrar', click: () => mainWindow.show() },
     {
@@ -59,6 +59,11 @@ export function createWindow(): void {
     mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show();
   });
 
+  app.whenReady().then(() => {
+    mainWindow.hide();
+    mainWindow.setSkipTaskbar(true);
+  });*/
+
   app.on('second-instance', () => {
     if (mainWindow) {
       if (mainWindow.isMinimized()) {
@@ -68,14 +73,10 @@ export function createWindow(): void {
     }
   });
 
-  app.whenReady().then(() => {
-    mainWindow.hide();
-    mainWindow.setSkipTaskbar(true);
-  });
-
+  /*
   app.on('ready', () => {
     autoUpdater.checkForUpdatesAndNotify();
-  });
+  });*/
 
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL']);

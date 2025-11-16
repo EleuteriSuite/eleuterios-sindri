@@ -1,19 +1,19 @@
 import { SindriFileSavedPayload } from '@renderer/env'
 
-export const saveHandler = (filePath: string, content: string) => {
-  if (!filePath) return saveAsHandler(content)
+export const saveHandler = (filePath, content) => {
+  if (!filePath.value) return saveAsHandler(content.value)
 
   return () => {
     if (window?.sindriFiles?.save) {
-      window.sindriFiles.save(filePath, content)
+      window.sindriFiles.save(filePath.value, content.value)
     }
   }
 }
 
-export const saveAsHandler = (content: string) => {
+export const saveAsHandler = (content) => {
   return () => {
     if (window?.sindriFiles?.saveAsDialog) {
-      window.sindriFiles.saveAsDialog(content)
+      window.sindriFiles.saveAsDialog(content.value)
     }
   }
 }

@@ -9,7 +9,7 @@ export default defineConfig({
       rollupOptions: {
         input: {
           index: 'src/main/index.ts',
-          bufferWindows: 'src/main/bufferWindows.js',
+          bufferWindows: 'src/main/bufferWindows.js'
         }
       }
     }

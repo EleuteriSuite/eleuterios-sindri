@@ -38,7 +38,7 @@ const ensureSindriAndWriteReadme = async (
   if (!exists) {
     await fs.promises.mkdir(sindriDir, { recursive: true })
     // Resolve the template directory next to this file at runtime
-    const templateDir = path.resolve(__dirname, 'sindri-previewer')
+    const templateDir = path.resolve(__dirname, '..', '..', 'public', 'sindri-previewer')
     try {
       await copyDirectory(templateDir, sindriDir)
     } catch (e) {

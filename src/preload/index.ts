@@ -9,7 +9,7 @@ import { sindriFilesSaveAs } from './saveAsFile'
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)
-    contextBridge.exposeInMainWorld('sindriFiles', sindriFiles)
+    contextBridge.exposeInMainWorld('sindriFiles', { ...sindriFiles, ...sindriFilesSaveAs })
   } catch (error) {
     console.error(error)
   }
