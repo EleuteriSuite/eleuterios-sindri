@@ -18,9 +18,18 @@ declare global {
     content?: string
   }
 
+  interface SindriFileSavedPayload {
+    canceled?: boolean
+    path?: string
+    name?: string
+    ext?: string
+    content?: string
+  }
+
   interface SindriFilesAPI {
     openDialog: () => void
     onFileContent: (callback: (payload: SindriFilePayload) => void) => void
+    onFileSaved: (callback: (payload: SindriFileSavedPayload) => void) => void
   }
 
   interface Window {

@@ -25,6 +25,10 @@
               </li>
 
               <li>
+                <SaveAsFile class="font-medium text-sm" />
+              </li>
+
+              <li>
                 <RouterLink @click="openLink()" to="/" class="font-medium text-sm">
                   Home
                 </RouterLink>
@@ -88,6 +92,10 @@
 
               <li class="mb-1">
                 <OpenFile class="block cursor-pointer p-4 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded" />
+              </li>
+
+              <li class="mb-1">
+                <SaveAsFile class="block cursor-pointer p-4 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded" />
               </li>
 
               <li class="mb-1">
@@ -172,6 +180,7 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from './store/user'
 import { useSettingsStore } from './store/settings'
 import OpenFile from './components/OpenFile.vue'
+import SaveAsFile from '@renderer/components/SaveAsFile.vue'
 
 // stores
 const user = useUserStore()

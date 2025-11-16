@@ -2,6 +2,7 @@ import { app, BrowserWindow, ipcMain, powerSaveBlocker } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
 import { createWindow } from './window'
 import { setupOpenFilesIpc } from './openFiles'
+import { setupSaveFilesIpc } from './saveAsFiles'
 
 // Evitar suspensión del sistema
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -25,6 +26,7 @@ app.whenReady().then(() => {
   ipcMain.on('ping', () => console.log('pong'))
 
   setupOpenFilesIpc()
+  setupSaveFilesIpc()
 
   // Ventana principal
   createWindow()
