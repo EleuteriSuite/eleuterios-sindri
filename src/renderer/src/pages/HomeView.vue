@@ -1,16 +1,26 @@
 <template>
-  <div>
-    <h1 class="w-full text-center">Sindri Notepad</h1>
-    <div class="mt-3">Fichero abierto: <span v-html="filePath" /></div>
-    <QuillEditor
-      theme="snow"
-      class="mt-3 h-[40vh]"
-      v-model:content="htmlContent"
-      contentType="html"
-      @update:content="convertHTMLtoMarkdown"
-    />
-    <div class="h-[40vh]">
-      Ariadna controls.
+  <div class="grid grid-cols-12 gap-4 p-4">
+    <div class="col-span-2">
+      Título<br>
+      slug<br>
+      Fecha publicación<br>
+      Estado: no publicado<br>
+    </div>
+    <div class="col-span-5">
+      <div class="mt-3">Fichero abierto: <span v-html="filePath" />. Estado: <span v-if="fileSaved">Guardado</span><span v-else>Sin guardar</span></div>
+      <QuillEditor
+        theme="snow"
+        class="mt-3 min-h-[40vh] max-h-[40vh] overflow-y-auto"
+        v-model:content="htmlContent"
+        contentType="html"
+        @update:content="convertHTMLtoMarkdown"
+      />
+      <div class="h-[40vh]">
+        Ariadna controls.
+      </div>
+    </div>
+    <div class="col-span-5">
+      Sindri preview
     </div>
   </div>
 </template>
@@ -42,14 +52,7 @@ function setUserCookies() {
 }
 
 function convertHTMLtoMarkdown() {
-  // Forzar separación de párrafos en el HTML
-  /*const htmlNormalizado = htmlContent.value
-    // salto doble entre <p> consecutivos
-    //.replace(/<\/p>\s*<p/gi, '</p>\n<p')
-    // y también al final de cada </p>
-    .replace(/<\/p>/gi, '</p>\n')*/
-
-  //markdownContent.value = convert(htmlNormalizado)
+  fileSaved.value = false
   markdownContent.value = turndownService.turndown(htmlContent.value)
 }
 

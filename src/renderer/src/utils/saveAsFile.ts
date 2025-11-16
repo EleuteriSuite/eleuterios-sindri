@@ -1,7 +1,7 @@
 import { SindriFileSavedPayload } from '@renderer/env'
 
 export const saveHandler = (filePath, content) => {
-  if (!filePath.value) return saveAsHandler(content.value)
+  if (filePath.value != '') return () => { saveAsHandler(content) }
 
   return () => {
     if (window?.sindriFiles?.save) {
