@@ -26,14 +26,24 @@ declare global {
     content?: string
   }
 
+  interface sindriServerStaticPreviewLoadedPayload {
+    url?: string
+    rootDir?: string
+  }
+
   interface SindriFilesAPI {
     openDialog: () => void
     onFileContent: (callback: (payload: SindriFilePayload) => void) => void
     onFileSaved: (callback: (payload: SindriFileSavedPayload) => void) => void
   }
 
+  interface SindriServerStaticAPI {
+    onPreviewLoaded: (callback: (payload: SindriFilePayload) => void) => void
+  }
+
   interface Window {
     electron: unknown
     sindriFiles: SindriFilesAPI
+    sindriServerStatic: SindriServerStaticAPI
   }
 }

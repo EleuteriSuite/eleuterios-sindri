@@ -44,16 +44,19 @@
                   <ul class="py-1 text-sm">
                     <li>
                       <OpenFile
+                        @click="archivoOpen = false"
                         class="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
                       />
                     </li>
                     <li>
                       <SaveFile
+                        @click="archivoOpen = false"
                         class="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
                       />
                     </li>
                     <li>
                       <SaveAsFile
+                        @click="archivoOpen = false"
                         class="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
                       />
                     </li>
@@ -131,12 +134,15 @@
                 </button>
                 <div v-if="archivoOpenMobile" class="ml-4">
                   <OpenFile
+                    @click="archivoOpenMobile = false"
                     class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
                   />
                   <SaveFile
+                    @click="archivoOpenMobile = false"
                     class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
                   />
                   <SaveAsFile
+                    @click="archivoOpenMobile = false"
                     class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
                   />
                 </div>

@@ -3,6 +3,7 @@ import { electronApp, optimizer } from '@electron-toolkit/utils'
 import { createWindow } from './window'
 import { setupOpenFilesIpc } from './openFiles'
 import { setupSaveFilesIpc } from './saveAsFiles'
+import { setupServerStatic } from './serverStatic'
 
 // Evitar suspensión del sistema
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -27,6 +28,7 @@ app.whenReady().then(() => {
 
   setupOpenFilesIpc()
   setupSaveFilesIpc()
+  setupServerStatic()
 
   // Ventana principal
   createWindow()
