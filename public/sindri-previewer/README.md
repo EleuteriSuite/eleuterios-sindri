@@ -3,7 +3,7 @@
 Testing...
 
 ```sindri:ui:button
-text: "Visita nuestra tienda"
+description: "Visita nuestra tienda"
 variant: "primary"
 size: "lg"
 as: "a"

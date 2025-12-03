@@ -51,11 +51,11 @@
             attrs.type = cfg.type || 'button';
         }
 
-        const text = cfg.text != null ? String(cfg.text) : 'Button';
+        const description = cfg.description != null ? String(cfg.description) : 'Button';
         const attrStr = C.attrsToString ? C.attrsToString(attrs) : '';
 
         // Wrap inside a container to avoid Markdown post-processing issues
-        return `<div class="sindri-ui sindri-ui-button"><${tag} ${attrStr}>${text}</${tag}></div>`;
+        return `<div class="sindri-ui sindri-ui-button"><${tag} ${attrStr}>${description}</${tag}></div>`;
     }
 
     function renderCard(cfg) {
