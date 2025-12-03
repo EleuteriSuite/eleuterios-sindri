@@ -17,8 +17,15 @@
         v-model:content="htmlContent"
         contentType="html"
         @update:content="convertHTMLtoMarkdown"
+        @selectionChange="handleSelectionChange"
       />
-      <div class="h-[40vh]">Ariadna controls.</div>
+      <div class="h-[40vh]">
+        <SindriMarketingHero
+          v-if="currentSindriComponent && currentSindriComponent.name === 'sindri:marketing:hero'"
+          v-model="currentSindriComponent.config"
+          @change="handleSindriComponentUpdate"
+        />
+      </div>
     </div>
     <div class="col-span-5">
       <webview ref="server_static_preview" style="width: 100%; height: 100%" allowpopups />
@@ -27,17 +34,25 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, watch, ref, nextTick } from 'vue'
+import { onMounted, onUnmounted, watch, ref, toRaw } from 'vue'
 import { useUserStore } from '../store/user'
 import { QuillEditor } from '@vueup/vue-quill'
 import TurndownService from 'turndown'
 import { fileOpenedHandler, openHandler } from '@renderer/utils/openFile'
 import { fileSavedHandler, saveAsHandler, saveHandler } from '@renderer/utils/saveAsFile'
+import { getParentCodeBlock } from '@renderer/utils/quill'
+import SindriMarketingHero
+  from '@renderer/components/sindri/marketing/SindriMarketingHero.vue'
+import { SindriComponent } from '@renderer/components/sindri/marketing/sindri_marketring'
+import YAML from 'yaml'
 
 // stores
 const user = useUserStore()
 
 const server_static_preview = ref<any | null>(null)
+
+// Sindri component
+const currentSindriComponent = ref<SindriComponent | null>(null)
 
 // State to coordinate
 const pendingPreviewUrl = ref<string | null>(null)
@@ -98,6 +113,50 @@ function setUserCookies() {
 function convertHTMLtoMarkdown() {
   fileSaved.value = false
   markdownContent.value = turndownService.turndown(htmlContent.value)
+}
+
+function handleSindriComponentUpdate() {
+  console.log('handleSindriComponentUpdate', currentSindriComponent.value)
+
+  if (!currentSindriComponent.value || !currentSindriComponent.value.node) {
+    console.log('No hay componente seleccionado', currentSindriComponent)
+  }
+  console.log('handleSindriComponentUpdate config', toRaw(currentSindriComponent.value.config))
+  console.log('handleSindriComponentUpdate node', currentSindriComponent.value.node)
+
+  const parsedYAML = YAML.stringify(toRaw(currentSindriComponent.value.config))
+  console.log('handleSindriComponentUpdate parsedYAML', parsedYAML)
+
+  currentSindriComponent.value.node.el.innerHTML = parsedYAML
+  htmlContent.value = currentSindriComponent.value.node.doc.body.innerHTML
+  convertHTMLtoMarkdown()
+}
+
+function handleSelectionChange(e) {
+  console.log(e)
+  if (!e.range) return
+
+  const sindriNode = getParentCodeBlock(htmlContent.value, e.range.index)
+  console.log('Sindri node', sindriNode)
+  if (!sindriNode) {
+    currentSindriComponent.value = null
+    return null
+  }
+  console.log('Sindri class', sindriNode.el.className)
+
+  const sindriComponentName = sindriNode.el.className.split('-')[1]?? 'null'
+  if (!sindriComponentName) {
+    currentSindriComponent.value = null
+    return null
+  }
+  console.log('Sindri component name', sindriComponentName)
+
+  currentSindriComponent.value = {
+    name: sindriComponentName,
+    node: sindriNode,
+    config: YAML.parse(sindriNode.el.innerHTML)
+  }
+  return true
 }
 
 onMounted(() => {
