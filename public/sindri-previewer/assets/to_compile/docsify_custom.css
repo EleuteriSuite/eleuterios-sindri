@@ -1,0 +1,15 @@
+#main {
+    width: 100%;
+}
+.app-nav a {
+    margin-right: 15px;
+}
+.markdown-section {
+    margin: 0;
+}
+.content {
+    margin: 0;
+}
+.markdown-section {
+    max-width: 100%;
+}
