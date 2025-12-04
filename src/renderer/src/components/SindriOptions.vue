@@ -1,5 +1,6 @@
 <template>
   <div>
+    <SindriBlocks />
     <SindriInput label="Title" v-model="config.title" class="mt-3" />
     <SindriInput label="Slug" v-model="config.slug" class="mt-3" />
 
@@ -97,6 +98,8 @@ import { Icon } from '@iconify/vue'
 import radixIcons from '@iconify-json/radix-icons/icons.json'
 import { CalendarDate } from '@internationalized/date'
 import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot } from 'reka-ui'
+import SindriButton from '@renderer/components/ui/SindriButton.vue'
+import SindriBlocks from '@renderer/components/sindri/SindriBlocks.vue'
 
 const currentDate = new Date()
 const date = new CalendarDate(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDay())
