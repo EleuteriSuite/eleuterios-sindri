@@ -1,6 +1,6 @@
 <template>
   <a
-    class="inline-block rounded border-2 px-5 py-3 font-medium shadow-sm transition-colors text-center"
+    class="inline-block rounded border-2 px-5 py-2 font-medium shadow-sm transition-colors text-center"
     :class="`text-${text_color} bg-${variant} border-${hover_variant} hover:text-${text_color_variant} hover:bg-${hover_variant} hover:border-${variant}`"
     :href="href"
   >

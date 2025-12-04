@@ -1,12 +1,12 @@
 <template>
-  <DialogRoot>
+  <DialogRoot v-model:open="open">
     <DialogTrigger as-child>
-      <SindriButton variant="secondary">
+      <SindriButton variant="secondary" class="w-full">
         Add Block
       </SindriButton>
     </DialogTrigger>
     <DialogPortal>
-      <DialogOverlay class="bg-blackA9 data-[state=open]:animate-overlayShow fixed inset-0 z-30" />
+      <DialogOverlay class="bg-black opacity-70 data-[state=open]:animate-overlayShow fixed inset-0 z-30" />
       <DialogContent
         class="border-2 bg-white border-primary data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[750px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[100]"
       >
@@ -45,7 +45,7 @@
             >
               <div>
                 <template v-for="block in blocks.marketing" :key="block">
-                  <SindriBlock :category="'marketing'" :type="block" />
+                  <SindriBlock :category="'marketing'" :type="block" @click="sindriBlockSelected('marketing', block)" />
                 </template>
               </div>
             </TabsContent>
@@ -96,9 +96,17 @@ import SindriButton from '@renderer/components/ui/SindriButton.vue'
 import { Icon } from '@iconify/vue'
 import radixIcons from '@iconify-json/radix-icons/icons.json'
 import SindriBlock from '@renderer/components/sindri/SindriBlock.vue'
+import { ref } from "vue";
 
 const blocks = {
   marketing: ['hero']
+}
+
+const open = ref(false)
+
+const sindriBlockSelected = (category, block) => {
+  open.value = false
+  window.dispatchEvent(new CustomEvent('add-sindri-block', { detail: { category, block } }))
 }
 
 </script>

@@ -1,7 +1,5 @@
 <template>
-  <div class="text-sm font-medium text-gray-700 mt-3">
-    File: <span v-html="filePath" />.
-  </div>
+  <div class="text-sm font-medium text-gray-700 mt-3">File: <span v-html="filePath" />.</div>
   <div class="text-sm font-medium text-gray-700 my-3">
     State: <span v-if="fileSaved">Saved</span><span v-else>To save...</span>
   </div>
@@ -10,6 +8,7 @@
     class="mt-3 min-h-[40vh] max-h-[40vh] overflow-y-auto"
     v-model:content="htmlContent"
     contentType="html"
+    :toolbar="toolbarOptions"
     @update:content="convertHTMLtoMarkdown"
     @selectionChange="handleSelectionChange"
   />
@@ -24,10 +23,13 @@
 <script setup lang="ts">
 import SindriMarketingHero from '@renderer/components/sindri/marketing/SindriMarketingHero.vue'
 import { QuillEditor } from '@vueup/vue-quill'
-import { nextTick, ref, toRaw } from 'vue'
-import { SindriComponent } from '@renderer/components/sindri/marketing/sindri_marketring'
+import { nextTick, onMounted, onUnmounted, ref, toRaw } from 'vue'
+import {
+  SindriBlockFactory,
+  SindriComponent
+} from '@renderer/components/sindri/marketing/sindri_marketring'
 import YAML from 'yaml'
-import { getParentCodeBlock } from '@renderer/utils/quill'
+import { getParentBlock, getParentCodeBlock } from '@renderer/utils/quill'
 import TurndownService from 'turndown'
 
 const emit = defineEmits(['htmlToMarkdownConverted'])
@@ -38,8 +40,20 @@ const currentSindriComponent = ref<SindriComponent | null>(null)
 const { filePath, fileSaved } = defineProps(['filePath', 'fileSaved'])
 
 // Editor content
+const toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+  ['blockquote'],
+  ['link'],
+  // custom button values
+  [{ list: 'ordered' }, { list: 'bullet' }],
+  [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+
+  [{ header: [1, 2, 3, 4, 5, 6, false] }]
+]
 const htmlContent = defineModel('htmlContent', { type: String, required: true })
 const markdownContent = defineModel('markdownContent', { type: String, required: true })
+let currentParentNodeSelected: Node | null = null
+let sindriComponentToAdd: object | null = null
 
 const turndownService = new TurndownService({
   headingStyle: 'atx',
@@ -71,6 +85,9 @@ function handleSelectionChange(e) {
   console.log(e)
   if (!e.range) return
 
+  currentParentNodeSelected = getParentBlock(htmlContent.value, e.range.index)
+  console.log('Parent node', currentParentNodeSelected)
+
   const sindriNode = getParentCodeBlock(htmlContent.value, e.range.index)
   console.log('Sindri node', sindriNode)
   if (!sindriNode) {
@@ -93,4 +110,32 @@ function handleSelectionChange(e) {
   }
   return true
 }
+
+const HandleAddSindriBlock = (e) => {
+  if (!currentParentNodeSelected) return
+
+  const { category, block } = (e as CustomEvent).detail
+  console.log('Category, Block', category, block)
+
+  sindriComponentToAdd = SindriBlockFactory(category, block)
+
+  const sindriCamponentNodeToAdd: Node = document.createElement('pre')
+  const sindriCamponentNodeCodeToAdd: Node = document.createElement('code')
+  sindriCamponentNodeCodeToAdd.className = 'language-sindri:' + category + ':' + block
+  sindriCamponentNodeCodeToAdd.innerHTML = YAML.stringify(toRaw(sindriComponentToAdd))
+  sindriCamponentNodeToAdd.appendChild(sindriCamponentNodeCodeToAdd)
+
+  currentParentNodeSelected.doc.body.insertBefore(sindriCamponentNodeToAdd, currentParentNodeSelected.el.nextSibling);
+
+  htmlContent.value = currentParentNodeSelected.doc.body.innerHTML
+  convertHTMLtoMarkdown()
+}
+
+onMounted(() => {
+  window.addEventListener('add-sindri-block', HandleAddSindriBlock as EventListener)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('add-sindri-block', HandleAddSindriBlock as EventListener)
+})
 </script>
