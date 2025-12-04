@@ -3,7 +3,7 @@
     class="font-medium text-sm cursor-pointer"
     @click="emitSaveEvent"
   >
-    Guardar
+    Save
   </a>
 </template>
 

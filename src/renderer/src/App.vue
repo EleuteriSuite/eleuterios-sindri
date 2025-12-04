@@ -20,9 +20,9 @@
                 <button
                   type="button"
                   class="font-medium text-sm cursor-pointer flex items-center gap-1"
-                  @click="archivoOpen = !archivoOpen"
+                  @click="fileOpen = !fileOpen"
                 >
-                  Archivo
+                  File
                   <svg
                     class="w-3 h-3"
                     xmlns="http://www.w3.org/2000/svg"
@@ -38,27 +38,99 @@
                 </button>
 
                 <div
-                  :class="{ hidden: !archivoOpen }"
+                  :class="{ hidden: !fileOpen }"
                   class="absolute mt-3 w-40 bg-white border rounded shadow-lg z-50"
                 >
                   <ul class="py-1 text-sm">
                     <li>
                       <OpenFile
-                        @click="archivoOpen = false"
+                        @click="fileOpen = false"
                         class="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
                       />
                     </li>
                     <li>
                       <SaveFile
-                        @click="archivoOpen = false"
+                        @click="fileOpen = false"
                         class="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
                       />
                     </li>
                     <li>
                       <SaveAsFile
-                        @click="archivoOpen = false"
+                        @click="fileOpen = false"
                         class="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
                       />
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li>
+                <button
+                  type="button"
+                  class="font-medium text-sm cursor-pointer flex items-center gap-1"
+                  @click="publishOpen = !publishOpen"
+                >
+                  Publish
+                  <svg
+                    class="w-3 h-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+
+                <div
+                  :class="{ hidden: !publishOpen }"
+                  class="absolute mt-3 w-40 bg-white border rounded shadow-lg z-50"
+                >
+                  <ul class="py-1 text-sm">
+                    <li>
+                      Web
+                    </li>
+                    <li>
+                      Store
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li>
+                <button
+                  type="button"
+                  class="font-medium text-sm cursor-pointer flex items-center gap-1"
+                  @click="exportOpen = !exportOpen"
+                >
+                  Export
+                  <svg
+                    class="w-3 h-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+
+                <div
+                  :class="{ hidden: !exportOpen }"
+                  class="absolute mt-3 w-40 bg-white border rounded shadow-lg z-50"
+                >
+                  <ul class="py-1 text-sm">
+                    <li>
+                      HTML
+                    </li>
+                    <li>
+                      PDF
                     </li>
                   </ul>
                 </div>
@@ -116,9 +188,9 @@
                 <button
                   type="button"
                   class="flex justify-between items-center w-full p-4 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
-                  @click="archivoOpenMobile = !archivoOpenMobile"
+                  @click="fileOpenMobile = !fileOpenMobile"
                 >
-                  <span>Archivo</span>
+                  <span>File</span>
                   <svg
                     class="w-4 h-4"
                     xmlns="http://www.w3.org/2000/svg"
@@ -132,19 +204,67 @@
                     />
                   </svg>
                 </button>
-                <div v-if="archivoOpenMobile" class="ml-4">
+                <div v-if="fileOpenMobile" class="ml-4">
                   <OpenFile
-                    @click="archivoOpenMobile = false"
+                    @click="fileOpenMobile = false"
                     class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
                   />
                   <SaveFile
-                    @click="archivoOpenMobile = false"
+                    @click="fileOpenMobile = false"
                     class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
                   />
                   <SaveAsFile
-                    @click="archivoOpenMobile = false"
+                    @click="fileOpenMobile = false"
                     class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
                   />
+                </div>
+              </li>
+              <li class="mb-1">
+                <button
+                  type="button"
+                  class="flex justify-between items-center w-full p-4 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
+                  @click="publishOpenMobile = !publishOpenMobile"
+                >
+                  <span>Publish</span>
+                  <svg
+                    class="w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+                <div v-if="publishOpenMobile" class="ml-4">
+                  Web<br>Store
+                </div>
+              </li>
+              <li class="mb-1">
+                <button
+                  type="button"
+                  class="flex justify-between items-center w-full p-4 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
+                  @click="exportOpenMobile = !exportOpenMobile"
+                >
+                  <span>Export</span>
+                  <svg
+                    class="w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+                <div v-if="exportOpenMobile" class="ml-4">
+                  HTML<br>PDF
                 </div>
               </li>
 
@@ -206,8 +326,16 @@ const router = useRouter()
 
 // state (was data())
 const mobileNavOpen = ref(false)
-const archivoOpen = ref(false)
-const archivoOpenMobile = ref(false)
+
+const fileOpen = ref(false)
+const fileOpenMobile = ref(false)
+
+const publishOpen = ref(false)
+const publishOpenMobile = ref(false)
+
+const exportOpen = ref(false)
+const exportOpenMobile = ref(false)
+
 const headerOpen = ref(true)
 
 // methods -> functions

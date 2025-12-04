@@ -21,26 +21,29 @@ export default defineConfig({
   renderer: {
     resolve: {
       alias: {
-        '@renderer': resolve('src/renderer/src')
+        '@renderer': resolve('src/renderer/src'),
+        /*'@registry': resolve('src/renderer/src/lib'),
+        '@components': resolve('src/renderer/src/lib/new-york-v4'),
+        '@lib': resolve('src/renderer/src/lib/new-york-v4/lib')*/
       }
     },
     server: {
       proxy: {
-        "/api": {
-          target: "https://api-v5.eleuterios.org/api", // URL del backend
+        '/api': {
+          target: 'https://api-v5.eleuterios.org/api', // URL del backend
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ""),
-        },
-      },
+          rewrite: (path) => path.replace(/^\/api/, '')
+        }
+      }
     },
     plugins: [
       vue({
         template: {
           compilerOptions: {
-            isCustomElement: (tag) => tag === 'webview',
+            isCustomElement: (tag) => tag === 'webview'
           }
         }
       })
     ]
-  },
+  }
 })

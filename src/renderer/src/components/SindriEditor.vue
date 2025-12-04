@@ -1,7 +1,9 @@
 <template>
-  <div class="mt-3">
-    Fichero abierto: <span v-html="filePath" />. Estado: <span v-if="fileSaved">Guardado</span
-    ><span v-else>Sin guardar</span>
+  <div class="text-sm font-medium text-gray-700 mt-3">
+    File: <span v-html="filePath" />.
+  </div>
+  <div class="text-sm font-medium text-gray-700 my-3">
+    State: <span v-if="fileSaved">Saved</span><span v-else>To save...</span>
   </div>
   <QuillEditor
     theme="snow"

@@ -3,7 +3,7 @@
     class="font-medium text-sm cursor-pointer"
     @click="emitOpenEvent"
   >
-    Abrir
+    Open
   </a>
 </template>
 
