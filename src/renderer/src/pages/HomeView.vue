@@ -1,10 +1,7 @@
 <template>
   <div class="grid grid-cols-12 gap-4 p-4">
     <div class="col-span-2">
-      Título<br />
-      slug<br />
-      Fecha publicación<br />
-      Estado: no publicado<br />
+      <SindriOptions />
     </div>
     <div class="col-span-5">
       <SindriEditor
@@ -32,6 +29,7 @@ import { onMounted, ref } from 'vue'
 import { useUserStore } from '../store/user'
 import SindriEditor from '@renderer/components/SindriEditor.vue'
 import SindriPreview from '@renderer/components/SindriPreview.vue'
+import SindriOptions from "@renderer/components/SindriOptions.vue";
 
 // stores
 const user = useUserStore()
