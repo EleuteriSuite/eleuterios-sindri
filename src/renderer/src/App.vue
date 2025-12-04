@@ -91,10 +91,18 @@
                 >
                   <ul class="py-1 text-sm">
                     <li>
-                      Web
+                      <div
+                        class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
+                      >
+                        Web
+                      </div>
                     </li>
                     <li>
-                      Store
+                      <div
+                        class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
+                      >
+                        Store
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -127,10 +135,18 @@
                 >
                   <ul class="py-1 text-sm">
                     <li>
-                      HTML
+                      <div
+                        class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
+                      >
+                        HTML
+                      </div>
                     </li>
                     <li>
-                      PDF
+                      <div
+                        class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
+                      >
+                        PDF
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -240,7 +256,16 @@
                   </svg>
                 </button>
                 <div v-if="publishOpenMobile" class="ml-4">
-                  Web<br>Store
+                  <div
+                    class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
+                  >
+                    Web
+                  </div>
+                  <div
+                    class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
+                  >
+                    Store
+                  </div>
                 </div>
               </li>
               <li class="mb-1">
@@ -264,7 +289,16 @@
                   </svg>
                 </button>
                 <div v-if="exportOpenMobile" class="ml-4">
-                  HTML<br>PDF
+                  <div
+                    class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
+                  >
+                    HTML
+                  </div>
+                  <div
+                    class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
+                  >
+                    PDF
+                  </div>
                 </div>
               </li>
 
