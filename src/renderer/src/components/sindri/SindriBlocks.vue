@@ -40,24 +40,24 @@
               </TabsTrigger>
             </TabsList>
             <TabsContent
-              class="grow p-5 rounded-b-md outline-none focus:shadow-[0_0_0_2px] grid grid-cols-2 sm:grid-cols-3 gap-4"
+              class="grow p-5 rounded-b-md outline-none focus:shadow-[0_0_0_2px] grid sm:grid-cols-2 gap-4 overflow-y-auto"
               value="tab1"
             >
-              <div>
-                <template v-for="block in blocks.marketing" :key="block">
+              <template v-for="block in blocks.marketing" :key="block">
+                <div>
                   <SindriBlock :category="'marketing'" :type="block" @click="sindriBlockSelected('marketing', block)" />
-                </template>
-              </div>
+                </div>
+              </template>
             </TabsContent>
             <TabsContent
-              class="grow p-5 rounded-b-md outline-none focus:shadow-[0_0_0_2px]  grid grid-cols-2 sm:grid-cols-3 gap-4"
+              class="grow p-5 rounded-b-md outline-none focus:shadow-[0_0_0_2px] grid sm:grid-cols-2 gap-4 overflow-y-auto"
               value="tab2"
             >
-              <p class="mb-5 !mt-0 text-mauve11 text-sm !leading-normal col-span-2 sm:col-span-3">
-                <template v-for="block in blocks.ui" :key="block">
+              <template v-for="block in blocks.ui" :key="block">
+                <div>
                   <SindriBlock :category="'ui'" :type="block" @click="sindriBlockSelected('ui', block)" />
-                </template>
-              </p>
+                </div>
+              </template>
             </TabsContent>
           </TabsRoot>
         </DialogDescription>
@@ -101,8 +101,63 @@ import SindriBlock from '@renderer/components/sindri/SindriBlock.vue'
 import { ref } from "vue";
 
 const blocks = {
-  marketing: ['hero'],
-  ui: ['breadcrumbs']
+  marketing: [
+    'banners',
+    'blog-cards',
+    'product-cards',
+    'product-collections',
+    'team-sections',
+    'newsletter-signup',
+    'contact-form',
+    'logo-clouds',
+    'headers',
+    'footers',
+    'announcements',
+    'sections',
+    'empty-content',
+    'faqs',
+    'polls',
+    'stats',
+    'pricing',
+    'feature-grids',
+    'feature',
+    'hero'
+  ],
+  ui: [
+    'breadcrumbs',
+    'tabs',
+    'pagination',
+    'progress-bars',
+    'loaders',
+    'steps',
+    'side-menu',
+    'vertical-menu',
+    'skip-links',
+    'stats',
+    'tables',
+    'timelines',
+    'toasts',
+    'media',
+    'accordions',
+    'range-inputs',
+    'textareas',
+    'checkboxes',
+    'radio-groups',
+    'selects',
+    'toggles',
+    'card',
+    'inputs',
+    'quantity-inputs',
+    'badges',
+    'button-groups',
+    'details-list',
+    'dividers',
+    'empty-states',
+    'dropdown',
+    'file-uploaders',
+    'filters',
+    'grids'
+  ]
 }
 
 const open = ref(false)

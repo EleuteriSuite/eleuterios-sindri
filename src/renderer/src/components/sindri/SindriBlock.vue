@@ -1,8 +1,14 @@
 <template>
   <div
-    class="inline-block rounded border-1 border-primary hover:border-secondary p-2 font-medium shadow-sm transition-colors text-center cursor-pointer"
+    class="w-full text-center inline-block rounded border-1 border-primary hover:border-secondary p-2 font-medium shadow-sm transition-colors text-center cursor-pointer"
   >
-    <img :src="`/src/assets/sindri/blocks/${category}/${type}.jpg`">
+
+    <div>
+      <span v-html="type" />
+    </div>
+    <div>
+      <img v-if="category === 'marketing'" :src="`/src/assets/sindri/blocks/${category}/sindri${category}${type}.jpg`">
+    </div>
   </div>
 </template>
 <script setup lang="ts">
