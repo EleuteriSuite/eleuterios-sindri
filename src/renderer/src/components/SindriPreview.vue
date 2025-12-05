@@ -7,6 +7,9 @@ import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { marked } from "marked";
 import { SindriFileSavedPayload } from '@renderer/env'
 
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+
 // Se usa en fileOpenedHandler
 const emit = defineEmits(['file-opened'])
 
@@ -120,6 +123,30 @@ const HandleSindriExportHtml = async (e: Event): Promise<void> => {
   descargarHTML('sindri-export.html', html)
 }
 
+const descargarPDF = (nombreFichero: string, pdfBuffer: Uint8Array | ArrayBuffer) => {
+  const blob = new Blob([pdfBuffer], { type: 'application/pdf' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = nombreFichero.endsWith('.pdf') ? nombreFichero : `${nombreFichero}.pdf`;
+
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  URL.revokeObjectURL(url);
+};
+const HandleSindriExportPdf = async (e: Event): Promise<void> => {
+  console.log('HandleSindriExportPdf', e, server_static_preview)
+
+  const pdfData = await server_static_preview.value.printToPDF({
+    printBackground: true
+  });
+
+  descargarPDF('sindri-export.pdf', pdfData);
+}
+
 onMounted(() => {
   window.addEventListener('sindri-open-file', openHandler)
   window.addEventListener(
@@ -132,6 +159,7 @@ onMounted(() => {
   window.addEventListener('sindri-file-saved', HandleSindriFileSaved as EventListener)
 
   window.addEventListener('sindri-export-html', HandleSindriExportHtml as EventListener)
+  window.addEventListener('sindri-export-pdf', HandleSindriExportPdf as EventListener)
 
   window.sindriServerStatic.onPreviewLoaded(HandleSindriServerStaticLoaded)
 
@@ -149,6 +177,7 @@ onUnmounted(() => {
   )
 
   window.removeEventListener('sindri-export-html', HandleSindriExportHtml as EventListener)
+  window.removeEventListener('sindri-export-pdf', HandleSindriExportPdf as EventListener)
 
   window.removeEventListener('sindri-save-file', saveHandler as EventListener)
   window.removeEventListener('sindri-save-as-file', saveAsHandler as EventListener)

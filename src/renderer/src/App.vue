@@ -143,11 +143,12 @@
                       </ExportHtmlFile>
                     </li>
                     <li>
-                      <div
+                      <ExportPdfFile
+                        @click="exportOpen = false"
                         class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
                       >
                         PDF
-                      </div>
+                      </ExportPdfFile>
                     </li>
                   </ul>
                 </div>
@@ -296,11 +297,12 @@
                   >
                     HTML
                   </ExportHtmlFile>
-                  <div
+                  <ExportPdfFile
+                    @click="exportOpenMobile = false"
                     class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
                   >
                     PDF
-                  </div>
+                  </ExportPdfFile>
                 </div>
               </li>
 
@@ -353,6 +355,7 @@ import OpenFile from './components/OpenFile.vue'
 import SaveAsFile from '@renderer/components/SaveAsFile.vue'
 import SaveFile from '@renderer/components/SaveFile.vue'
 import ExportHtmlFile from '@renderer/components/ExportHtmlFile.vue'
+import ExportPdfFile from '@renderer/components/ExportPdfFile.vue'
 
 // stores
 const user = useUserStore()
