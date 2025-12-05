@@ -98,6 +98,28 @@ const fileOpenedHandler = (e: Event) => {
   }
 }
 
+const descargarHTML = (nombreFichero: string, html: string) => {
+  const blob = new Blob([html], { type: 'text/html' })
+  const url = URL.createObjectURL(blob)
+
+  const a = document.createElement('a')
+  a.href = url
+  a.download = nombreFichero
+  a.click()
+
+  URL.revokeObjectURL(url)
+}
+
+const HandleSindriExportHtml = async (e: Event): Promise<void> => {
+  console.log('HandleSindriExportHtml', e, server_static_preview)
+
+  const html = await server_static_preview.value.executeJavaScript(`
+  document.documentElement.outerHTML
+`);
+
+  descargarHTML('sindri-export.html', html)
+}
+
 onMounted(() => {
   window.addEventListener('sindri-open-file', openHandler)
   window.addEventListener(
@@ -108,6 +130,8 @@ onMounted(() => {
   window.addEventListener('sindri-save-file', saveHandler as EventListener)
   window.addEventListener('sindri-save-as-file', saveAsHandler as EventListener)
   window.addEventListener('sindri-file-saved', HandleSindriFileSaved as EventListener)
+
+  window.addEventListener('sindri-export-html', HandleSindriExportHtml as EventListener)
 
   window.sindriServerStatic.onPreviewLoaded(HandleSindriServerStaticLoaded)
 
@@ -123,6 +147,8 @@ onUnmounted(() => {
     'sindri-file-opened',
     fileOpenedHandler as EventListener
   )
+
+  window.removeEventListener('sindri-export-html', HandleSindriExportHtml as EventListener)
 
   window.removeEventListener('sindri-save-file', saveHandler as EventListener)
   window.removeEventListener('sindri-save-as-file', saveAsHandler as EventListener)

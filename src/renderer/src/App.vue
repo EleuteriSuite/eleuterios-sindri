@@ -135,11 +135,12 @@
                 >
                   <ul class="py-1 text-sm">
                     <li>
-                      <div
+                      <ExportHtmlFile
+                        @click="exportOpen = false"
                         class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
                       >
                         HTML
-                      </div>
+                      </ExportHtmlFile>
                     </li>
                     <li>
                       <div
@@ -289,11 +290,12 @@
                   </svg>
                 </button>
                 <div v-if="exportOpenMobile" class="ml-4">
-                  <div
+                  <ExportHtmlFile
+                    @click="exportOpenMobile = false"
                     class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
                   >
                     HTML
-                  </div>
+                  </ExportHtmlFile>
                   <div
                     class="block cursor-pointer p-3 text-sm font-medium text-gray-900 hover:bg-gray-50 rounded"
                   >
@@ -350,6 +352,7 @@ import { useSettingsStore } from './store/settings'
 import OpenFile from './components/OpenFile.vue'
 import SaveAsFile from '@renderer/components/SaveAsFile.vue'
 import SaveFile from '@renderer/components/SaveFile.vue'
+import ExportHtmlFile from '@renderer/components/ExportHtmlFile.vue'
 
 // stores
 const user = useUserStore()
