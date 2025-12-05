@@ -337,7 +337,7 @@
     <main
       class="scrollable"
       :class="{ 'w-full': true }"
-      :style="{ height: '100vh', overflow: 'auto' }"
+      :style="{ overflow: 'hidden' }"
     >
       <div>
         <RouterView />

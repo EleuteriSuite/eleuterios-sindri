@@ -3,22 +3,22 @@
     <div class="col-span-2">
       <SindriOptions />
     </div>
-    <div class="col-span-5">
-      <SindriEditor
-        v-model:markdownContent="markdownContent"
-        v-model:htmlContent="htmlContent"
-        :file-path="filePath"
-        :file-saved="fileSaved"
-        @html-to-markdown-converted="setFileToUpdate"
-      />
-    </div>
-    <div class="col-span-5">
+    <div class="col-span-8">
       <SindriPreview
         v-model:file-path="filePath"
         v-model:file-saved="fileSaved"
         :html-content="htmlContent"
         :markdown-content="markdownContent"
         @file-opened="setContentOpened"
+      />
+    </div>
+    <div class="col-span-2">
+      <SindriEditor
+        v-model:markdownContent="markdownContent"
+        v-model:htmlContent="htmlContent"
+        :file-path="filePath"
+        :file-saved="fileSaved"
+        @html-to-markdown-converted="setFileToUpdate"
       />
     </div>
   </div>

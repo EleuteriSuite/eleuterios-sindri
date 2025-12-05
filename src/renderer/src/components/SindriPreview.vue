@@ -7,9 +7,6 @@ import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { marked } from "marked";
 import { SindriFileSavedPayload } from '@renderer/env'
 
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-
 // Se usa en fileOpenedHandler
 const emit = defineEmits(['file-opened'])
 

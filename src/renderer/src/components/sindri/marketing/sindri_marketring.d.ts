@@ -1,12 +1,20 @@
 export {} // ensure this file is a module
 
 declare global {
-  interface SindriComponent {
+  /*With Quill interface SindriComponent {
     name: string
     node: {
       el: Node
       doc: Document
     }
+    config: object
+  }*/
+  interface SindriComponent {
+    name: string
+    index: number
+    sindri: string
+    category: string
+    block: string
     config: object
   }
 
