@@ -5,28 +5,22 @@
   </div>
   <QuillEditor
     theme="snow"
-    class="mt-3 min-h-[40vh] max-h-[40vh] overflow-y-auto"
+    class="mt-3 min-h-[37vh] max-h-[37vh] overflow-y-auto"
     v-model:content="htmlContent"
     contentType="html"
     :toolbar="toolbarOptions"
     @update:content="convertHTMLtoMarkdown"
     @selectionChange="handleSelectionChange"
   />
-  <div class="h-[40vh]">
-    <SindriMarketingHero
-      v-if="currentSindriComponent && currentSindriComponent.name === 'sindri:marketing:hero'"
-      v-model="currentSindriComponent.config"
-      @change="handleSindriComponentUpdate"
-    />
-    <SindriUIBreadcrumbs
-      v-else-if="currentSindriComponent && currentSindriComponent.name === 'sindri:ui:breadcrumbs'"
+  <div class="h-[37vh] overflow-y-auto bg-gray-100 border border-gray-200 rounded-md p-3 mt-3 grid grid-cols-1 gap-4">
+    <SindriBlockForm
+      v-if="currentSindriComponent"
       v-model="currentSindriComponent.config"
       @change="handleSindriComponentUpdate"
     />
   </div>
 </template>
 <script setup lang="ts">
-import SindriMarketingHero from '@renderer/components/sindri/marketing/SindriMarketingHero.vue'
 import { QuillEditor } from '@vueup/vue-quill'
 import { nextTick, onMounted, onUnmounted, ref, toRaw } from 'vue'
 import {
@@ -34,11 +28,10 @@ import {
   SindriMarketingBlockFactory
 } from '@renderer/components/sindri/marketing/sindri_marketring'
 import { SindriUIBlockFactory } from '@renderer/components/sindri/ui/sindri_ui'
+import SindriBlockForm from '@renderer/components/sindri/SindriBlockForm.vue'
 import YAML from 'yaml'
 import { getParentBlock, getParentCodeBlock } from '@renderer/utils/quill'
 import TurndownService from 'turndown'
-import SindriUIBreadcrumbs
-  from '@renderer/components/sindri/ui/SindriUIBreadcrumbs.vue'
 
 const emit = defineEmits(['htmlToMarkdownConverted'])
 
