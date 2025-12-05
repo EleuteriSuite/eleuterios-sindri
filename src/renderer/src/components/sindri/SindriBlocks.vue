@@ -54,7 +54,9 @@
               value="tab2"
             >
               <p class="mb-5 !mt-0 text-mauve11 text-sm !leading-normal col-span-2 sm:col-span-3">
-                Under construction
+                <template v-for="block in blocks.ui" :key="block">
+                  <SindriBlock :category="'ui'" :type="block" @click="sindriBlockSelected('ui', block)" />
+                </template>
               </p>
             </TabsContent>
           </TabsRoot>
@@ -99,7 +101,8 @@ import SindriBlock from '@renderer/components/sindri/SindriBlock.vue'
 import { ref } from "vue";
 
 const blocks = {
-  marketing: ['hero']
+  marketing: ['hero'],
+  ui: ['breadcrumbs']
 }
 
 const open = ref(false)

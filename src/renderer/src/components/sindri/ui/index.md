@@ -1,0 +1,443 @@
+# UI Blocks
+
+## sindri:ui:breadcrumbs
+
+```sindri:ui:breadcrumbs
+items:
+  - title: "Home"
+    href: "#"
+  - title: "Category"
+    href: "#"
+  - title: "Product"
+    href: "#"
+```
+
+## sindri:ui:tabs
+
+```sindri:ui:tabs
+items:
+  - title: "Profile"
+    selected: true
+    content: "Contenido del perfil de ejemplo."
+  - title: "Account"
+    content: "Opciones de cuenta."
+  - title: "Notifications"
+    content: "Preferencias de notificación."
+```
+
+## sindri:ui:pagination
+
+```sindri:ui:pagination
+total: 5
+current: 2
+hrefBase: "#"
+```
+
+## sindri:ui:progress-bars
+
+```sindri:ui:progress-bars
+items:
+  - title: "Uploading files"
+    value: 35
+    max: 100
+    caption: "35% completed"
+  - title: "Generating report"
+    value: 72
+    max: 120
+    colorClass: "bg-emerald-600"
+    caption: "Step 3 of 5"
+```
+
+## sindri:ui:loaders
+
+```sindri:ui:loaders
+items:
+  - type: "spinner"
+    size: 8
+    colorClass: "text-indigo-600"
+    title: "Loading data"
+  - type: "dots"
+    size: 4
+    colorClass: "text-gray-500"
+    title: "Waiting"
+```
+
+## sindri:ui:steps
+
+```sindri:ui:steps
+items:
+  - title: "Account"
+    description: "Create your account"
+    status: "complete"
+  - title: "Profile"
+    description: "Add personal info"
+    status: "current"
+  - title: "Confirm"
+    description: "Review and finish"
+    status: "pending"
+```
+
+## sindri:ui:side-menu
+
+```sindri:ui:side-menu
+title: "Project"
+items:
+  - title: "Overview"
+    href: "#"
+    active: true
+  - title: "Settings"
+    href: "#"
+  - title: "Teams"
+    href: "#"
+content: "Main content placeholder"
+```
+
+## sindri:ui:vertical-menu
+
+```sindri:ui:vertical-menu
+title: "Settings"
+items:
+  - title: "Profile"
+    href: "#"
+  - title: "Billing"
+    href: "#"
+    active: true
+  - title: "Security"
+    href: "#"
+```
+
+## sindri:ui:skip-links
+
+```sindri:ui:skip-links
+items:
+  - title: "Skip to content"
+    href: "#main"
+  - title: "Skip to navigation"
+    href: "#nav"
+```
+
+## sindri:ui:stats
+
+```sindri:ui:stats
+items:
+  - value: "24k"
+    label: "Users"
+  - value: "98%"
+    label: "Uptime"
+  - value: "312"
+    label: "Deploys"
+```
+
+## sindri:ui:tables
+
+```sindri:ui:tables
+columns: ["Name", "Title", "Email"]
+rows:
+  - ["Alice", "Engineer", "alice@example.com"]
+  - ["Bob", "Manager", "bob@example.com"]
+```
+
+## sindri:ui:timelines
+
+```sindri:ui:timelines
+items:
+  - time: "2025-01-01"
+    title: "Project created"
+    description: "Initial repository setup."
+  - time: "2025-02-15"
+    title: "First release"
+    description: "v0.1.0 shipped"
+```
+
+## sindri:ui:toasts
+
+```sindri:ui:toasts
+items:
+  - variant: "success"
+    title: "Saved"
+    description: "Your changes have been saved."
+  - variant: "error"
+    title: "Failed"
+    description: "Could not connect to server."
+```
+
+## sindri:ui:media
+
+```sindri:ui:media
+items:
+  - src: "https://picsum.photos/seed/1/400/240"
+    alt: "Random 1"
+    title: "Card title 1"
+    description: "Short description here."
+  - src: "https://picsum.photos/seed/2/400/240"
+    alt: "Random 2"
+    title: "Card title 2"
+    description: "Another line of text."
+```
+
+## sindri:ui:accordions
+
+```sindri:ui:accordions
+items:
+  - title: "What are the basic features?"
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt similique..."
+    open: true
+  - title: "How do I get started?"
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit..."
+  - title: "What support options are available?"
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit..."
+```
+
+## sindri:ui:range-inputs
+
+```sindri:ui:range-inputs
+items:
+  - title: "Max Volume"
+    id: "maxVolume"
+    min: 0
+    max: 100
+    value: 20
+htmltag:
+  styles:
+    - background: "linear-gradient(180deg, #fff, #f8fafc)"
+```
+
+## sindri:ui:textareas
+
+```sindri:ui:textareas
+items:
+  - title: "Notes"
+    id: "Notes"
+    rows: 4
+    value: "Texto inicial"
+htmltag:
+  styles:
+    - background: "linear-gradient(180deg, #fff, #f8fafc)"
+```
+
+## sindri:ui:checkboxes
+
+```sindri:ui:checkboxes
+legend: "Checkboxes"
+items:
+  - id: "Option1"
+    title: "Option 1"
+    checked: true
+  - id: "Option2"
+    title: "Option 2"
+  - id: "Option3"
+    title: "Option 3"
+```
+
+## sindri:ui:radio-groups
+
+```sindri:ui:radio-groups
+legend: "Delivery"
+name: "DeliveryOption"
+items:
+  - id: "DeliveryStandard"
+    title: "Standard"
+    right: "Free"
+    value: "DeliveryStandard"
+    checked: true
+  - id: "DeliveryPriority"
+    title: "Next Day"
+    right: "£9.99"
+    value: "DeliveryPriority"
+```
+
+## sindri:ui:selects
+
+```sindri:ui:selects
+items:
+  - id: "Headline"
+    title: "Headliner"
+    placeholder: "Please select"
+    value: "JH"
+    options:
+      - { value: "JM", title: "John Mayer" }
+      - { value: "SRV", title: "Stevie Ray Vaughn" }
+      - { value: "JH", title: "Jimi Hendrix" }
+      - { value: "BBK", title: "B.B King" }
+      - { value: "AK", title: "Albert King" }
+      - { value: "BG", title: "Buddy Guy" }
+      - { value: "EC", title: "Eric Clapton" }
+```
+
+## sindri:ui:toggles
+
+```sindri:ui:toggles
+items:
+  - id: "AcceptConditions"
+  - id: "Newsletter"
+    checked: true
+```
+
+## sindri:ui:card
+
+```sindri:ui:card
+title: "Conoce nuestra tienda"
+content: "Descripción de la tienda"
+footer: "Acciones en la tienda"
+variant: "primary"
+size: "lg"
+as: "a"
+href: "https://tu-tienda.example"
+htmltag:
+  class: "w-1/3 border-2 border-gray-500"
+```
+
+## sindri:ui:inputs
+
+```sindri:ui:inputs
+items:
+  - title: "Email"
+    type: "email"
+    placeholder: "tu@correo.com"
+    description: "Nunca compartiremos tu correo."
+  - title: "Nombre"
+    type: "text"
+    placeholder: "Tu nombre"
+htmltag:
+  styles:
+    - background: "linear-gradient(180deg, #fff, #f8fafc)"
+```
+
+## sindri:ui:quantity-inputs
+
+```sindri:ui:quantity-inputs
+items:
+  - title: "Cantidad"
+    value: 2
+    min: 1
+    max: 10
+  - title: "Unidades"
+    value: 1
+    min: 0
+    max: 99
+htmltag:
+  styles:
+    - background: "linear-gradient(180deg, #ffffff, #f1f5f9)"
+```
+
+## sindri:ui:badges
+
+```sindri:ui:badges
+items:
+  - title: "Live"
+  - title: "Live"
+    htmltag:
+      class: "border border-purple-500 text-purple-700 bg-transparent"
+```
+
+## sindri:ui:button-groups
+
+```sindri:ui:button-groups
+items:
+  - title: "View"
+  - title: "Edit"
+  - title: "Delete"
+```
+
+## sindri:ui:details-list
+
+```sindri:ui:details-list
+items:
+  - title: "Title"
+    description: "Mr"
+  - title: "Name"
+    description: "John Frusciante"
+  - title: "Occupation"
+    description: "Guitarist"
+  - title: "Salary"
+    description: "$1,000,000+"
+  - title: "Bio"
+    description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit..."
+```
+
+## sindri:ui:dividers
+
+```sindri:ui:dividers
+title: "Title goes here"
+```
+
+## sindri:ui:empty-states
+
+```sindri:ui:empty-states
+title: "No items found"
+description: "Get started by creating your first item. It only takes a few seconds."
+action:
+  title: "Create Item"
+  href: "#"
+links:
+  - title: "Learn how"
+    href: "#"
+  - title: "view examples"
+    href: "#"
+```
+
+## sindri:ui:dropdown
+
+```sindri:ui:dropdown
+title: "Product"
+split: true
+open: true
+items:
+  - title: "Storefront"
+    href: "#"
+  - title: "Warehouse"
+    href: "#"
+  - title: "Stock"
+    href: "#"
+  - title: "Delete"
+    type: "button"
+    variant: "danger"
+```
+
+## sindri:ui:file-uploaders
+
+```sindri:ui:file-uploaders
+title: "Upload your file(s)"
+multiple: true
+```
+
+## sindri:ui:filters
+
+```sindri:ui:filters
+items:
+  - title: "Color"
+    type: "checkbox"
+    options:
+      - title: "Red"
+        checked: false
+      - title: "Blue"
+        checked: true
+      - title: "Green"
+        checked: true
+  - title: "Size"
+    type: "radio"
+    options:
+      - title: "M"
+        checked: false
+      - title: "L"
+        checked: true
+      - title: "XL"
+        checked: false
+  - title: "Price"
+    type: "range"
+    min: 5
+    max: 2000
+```
+
+## sindri:ui:grids
+
+```sindri:ui:grids
+cols: 4
+gap: 4
+items:
+  - content: "Item 1"
+  - content: "Item 2"
+  - content: "Item 3"
+  - content: "Item 4"
+  - content: "Item 5"
+```

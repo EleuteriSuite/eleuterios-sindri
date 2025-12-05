@@ -1,6 +1,6 @@
 export {} // ensure this file is a module
 
-export function SindriBlockFactory(category, block): SindriMarketingHero | null {
+export function SindriMarketingBlockFactory(category, block): SindriMarketingHero | null {
   if (category === 'marketing' && block === 'hero') {
     return <SindriMarketingHero>{
       title: {

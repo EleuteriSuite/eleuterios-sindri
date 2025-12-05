@@ -18,6 +18,11 @@
       v-model="currentSindriComponent.config"
       @change="handleSindriComponentUpdate"
     />
+    <SindriUIBreadcrumbs
+      v-else-if="currentSindriComponent && currentSindriComponent.name === 'sindri:ui:breadcrumbs'"
+      v-model="currentSindriComponent.config"
+      @change="handleSindriComponentUpdate"
+    />
   </div>
 </template>
 <script setup lang="ts">
@@ -25,12 +30,15 @@ import SindriMarketingHero from '@renderer/components/sindri/marketing/SindriMar
 import { QuillEditor } from '@vueup/vue-quill'
 import { nextTick, onMounted, onUnmounted, ref, toRaw } from 'vue'
 import {
-  SindriBlockFactory,
-  SindriComponent
+  SindriComponent,
+  SindriMarketingBlockFactory
 } from '@renderer/components/sindri/marketing/sindri_marketring'
+import { SindriUIBlockFactory } from '@renderer/components/sindri/ui/sindri_ui'
 import YAML from 'yaml'
 import { getParentBlock, getParentCodeBlock } from '@renderer/utils/quill'
 import TurndownService from 'turndown'
+import SindriUIBreadcrumbs
+  from '@renderer/components/sindri/ui/SindriUIBreadcrumbs.vue'
 
 const emit = defineEmits(['htmlToMarkdownConverted'])
 
@@ -117,7 +125,7 @@ const HandleAddSindriBlock = (e) => {
   const { category, block } = (e as CustomEvent).detail
   console.log('Category, Block', category, block)
 
-  sindriComponentToAdd = SindriBlockFactory(category, block)
+  sindriComponentToAdd = SindriMarketingBlockFactory(category, block)?? SindriUIBlockFactory(category, block)
 
   const sindriCamponentNodeToAdd: Node = document.createElement('pre')
   const sindriCamponentNodeCodeToAdd: Node = document.createElement('code')
@@ -125,7 +133,10 @@ const HandleAddSindriBlock = (e) => {
   sindriCamponentNodeCodeToAdd.innerHTML = YAML.stringify(toRaw(sindriComponentToAdd))
   sindriCamponentNodeToAdd.appendChild(sindriCamponentNodeCodeToAdd)
 
-  currentParentNodeSelected.doc.body.insertBefore(sindriCamponentNodeToAdd, currentParentNodeSelected.el.nextSibling);
+  currentParentNodeSelected.doc.body.insertBefore(
+    sindriCamponentNodeToAdd,
+    currentParentNodeSelected.el.nextSibling
+  )
 
   htmlContent.value = currentParentNodeSelected.doc.body.innerHTML
   convertHTMLtoMarkdown()
