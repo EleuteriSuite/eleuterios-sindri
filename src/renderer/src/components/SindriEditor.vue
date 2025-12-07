@@ -69,6 +69,7 @@ import radixIcons from '@iconify-json/radix-icons/icons.json'
 import { Icon } from '@iconify/vue'
 
 // const emit = defineEmits(['htmlToMarkdownConverted'])
+const emit = defineEmits(['markdownUpdated'])
 
 // Sindri component
 const currentSindriComponent = ref<SindriComponent | null>(null)
@@ -88,6 +89,8 @@ const { filePath, fileSaved } = defineProps(['filePath', 'fileSaved'])
 ]*/
 // const htmlContent = defineModel('htmlContent', { type: String, required: true })
 const markdownContent = defineModel('markdownContent', { type: String, required: true })
+let markdownContentModified: number|null = null
+const markdownContentMilisecondsToAutosave: number = 2000
 // let currentParentNodeSelected: Node | null = null
 let sindriComponentToAdd: object | null = null
 
@@ -103,8 +106,9 @@ const parseBlockTree = () => {
     blockTree.value = []
     return
   }
-  const tokens = marked.lexer(markdownContent.value)
-  blockTree.value = tokens.filter((token) => token.type === 'code' && token.lang.split(':')[0] === 'sindri').map((token, idx) => {
+  const tokens = marked.lexer(markdownContent.value).filter((token) => token.type === 'code' && token.lang.split(':')[0] === 'sindri')
+
+  if (!blockTree.value || tokens.length !== blockTree.value.length) blockTree.value = tokens.map((token, idx) => {
     const [sindri, category, block] = token.lang.split(':')
 
     return {
@@ -119,6 +123,8 @@ const parseBlockTree = () => {
 }
 
 watch(markdownContent, parseBlockTree)
+
+let autoSaveMarkdownContent: number | undefined
 
 const reorderBlock = (idx: number, direction: 'up' | 'down') => {
   if (!blockTree.value) return
@@ -138,6 +144,11 @@ const reloadMarkdownFromBlockTree = () => {
     const yamlString = YAML.stringify(block.config)
     return `\`\`\`sindri:${block.category}:${block.block}\n${yamlString}\n\`\`\``
   }).join('\n')
+
+  if (markdownContent.value !== newMarkdown) {
+    markdownContentModified = Date.now()
+    emit('markdownUpdated')
+  }
   markdownContent.value = newMarkdown
 }
 
@@ -217,6 +228,7 @@ const HandleAddSindriBlock = (e) => {
     newBlockTree.splice(currentSindriComponent.value.index + 1, 0, newBlockToTree)
     blockTree.value = newBlockTree
   } else {
+    if (!blockTree.value) blockTree.value = []
     blockTree.value.push(newBlockToTree)
   }
   reloadMarkdownFromBlockTree()
@@ -238,9 +250,19 @@ const HandleAddSindriBlock = (e) => {
 
 onMounted(() => {
   window.addEventListener('add-sindri-block', HandleAddSindriBlock as EventListener)
+
+  autoSaveMarkdownContent = window.setInterval(() => {
+    if (markdownContentModified && markdownContentModified < Date.now() - markdownContentMilisecondsToAutosave) {
+      console.log('Auto save markdown content')
+      markdownContentModified = null
+      window.dispatchEvent(new CustomEvent('sindri-save-file'))
+    }
+  }, markdownContentMilisecondsToAutosave)
 })
 
 onUnmounted(() => {
   window.removeEventListener('add-sindri-block', HandleAddSindriBlock as EventListener)
+
+  clearInterval(autoSaveMarkdownContent)
 })
 </script>

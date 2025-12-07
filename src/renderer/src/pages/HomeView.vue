@@ -18,8 +18,9 @@
         v-model:htmlContent="htmlContent"
         :file-path="filePath"
         :file-saved="fileSaved"
-        @html-to-markdown-converted="setFileToUpdate"
+        @markdown-updated="setFileToUpdate"
       />
+      <!-- @html-to-markdown-converted="setFileToUpdate" -->
     </div>
   </div>
 </template>
